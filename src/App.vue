@@ -1,17 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <form>
+      <label>Weight in KG : </label>
+      <input v-model.number="weightInKg" />
+    </form>
+    <p v-if="this.weightInKg !==''">Weight in Pounds: {{ weightInLb }}</p>
+
+    <hr>
+
+    <form>
+      <label>Temperature in Celcius : </label>
+      <input v-model.number="tempCelcius" />
+    </form>
+    <p v-if="this.tempCelcius !==''">Temperature in Kelvin: {{tempKelvin}}</p>
+    <p v-if="this.tempCelcius !==''">Temperature in Farenheit: {{tempFarenheit}}</p>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      weightInKg: '',
+      tempCelcius: '',
+    };
+  },
+  computed: {
+    weightInLb() {
+      return this.weightInKg * 2.205;
+      
+    },
+    tempKelvin () {
+      return this.tempCelcius + 273.15;
+    },
+    tempFarenheit() {
+      return ( this.tempCelcius* 9/5 + 32);
+    }
+  },
+};
 </script>
 
 <style>
